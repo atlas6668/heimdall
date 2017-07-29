@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<description>JSTL 1.1 functions library</description>
+	<display-name>JSTL functions</display-name>
+	<tlib-version>1.1</tlib-version>
+	<short-name>fnc</short-name>
+	<uri>http://java.sun.com/jsp/jstl/functionsc</uri>
+	
+	<function>
+		<description>获取图片列表</description>
+		<name>getWxImageList</name>
+		<function-class>com.wx.serveplatform.utils.WxMaterialUtil</function-class>
+		<function-signature>java.util.List getWxImageList(java.lang.String)</function-signature>
+		<example>${fnc:getWxImageList(appId)}</example>
+	</function>
+	
+	<function>
+		<description>获取音频列表</description>
+		<name>getWxVoiceList</name>
+		<function-class>com.wx.serveplatform.utils.WxMaterialUtil</function-class>
+		<function-signature>java.util.List getWxVoiceList(java.lang.String)</function-signature>
+		<example>${fnc:getWxVoiceList(appId)}</example>
+	</function>
+	
+	<function>
+		<description>获取视频列表</description>
+		<name>getWxVideoList</name>
+		<function-class>com.wx.serveplatform.utils.WxMaterialUtil</function-class>
+		<function-signature>java.util.List getWxVideoList(java.lang.String)</function-signature>
+		<example>${fnc:getWxVideoList(appId)}</example>
+	</function>
+	
+	<function>
+		<description>获取图文列表</description>
+		<name>getWxNewsList</name>
+		<function-class>com.wx.serveplatform.utils.WxMaterialUtil</function-class>
+		<function-signature>java.util.List getWxNewsList(java.lang.String)</function-signature>
+		<example>${fnc:getWxNewsList(appId)}</example>
+	</function>
+	
+</taglib> 

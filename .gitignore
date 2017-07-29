@@ -1,0 +1,38 @@
+# common files
+*.log
+*.lock
+*.swp
+
+# Java class files
+*.class
+#*.jar
+*.war
+*.ear
+
+#Gradle
+.gradletasknamecache
+.gradle/
+build/
+bin/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+
+# database file
+
+

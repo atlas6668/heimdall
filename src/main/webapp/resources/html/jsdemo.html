@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 延迟加载js，提高页面加载速度 -->
+	<script src="/wxserverplatform/resources/js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$.ajax({
+			type: 'get' ,
+			url : "http://wxserver.xiaoma.com/wxserverplatform/weixin/api/getJsTicket", // 请求票据的地址
+			data:{
+				appId: "wx598a3c6c39fd5100",
+				signUrl: "http://testtest"  // 打票的地址                          
+			},
+			dataType:'jsonp',
+			jsonp:"callback",
+			success: function (json) {
+				alert("appId:wx598a3c6c39fd5100");
+				alert("success:"+json);
+				alert("timestamp:"+json.timestamp);
+				alert("nonceStr:"+json.nonceStr);
+				alert("signature:"+json.signature);
+				
+			},
+			error:function(e){
+				alert("error:"+e);
+			}
+		});
+		
+	</script>
+	<div class="hero-unit">
+	    <h1>Hello,World!爪哇欢迎您！</h1>
+    </div>
+</body>
+</html>

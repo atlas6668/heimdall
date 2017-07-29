@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+    <description>pagination for some page</description>
+    <display-name>pagination</display-name>
+    <tlib-version>1.0</tlib-version>
+    <short-name>pagination</short-name>
+    <uri>http://www.apisuage.com/pagination</uri>
+
+    <!-- Invoke 'Generate' action to add tags or functions -->
+    <tag>
+        <description>分页标签</description>
+        <name>pagination</name>
+        <tag-class>com.wx.serveplatform.common.taglib.PaginationTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <name>pageTagType</name>
+            <required>false</required>
+        </attribute>
+
+        <attribute>
+            <name>pageTagClass</name>
+            <required>false</required>
+        </attribute>
+        
+        <attribute>
+            <name>currentPageTagClass</name>
+            <required>false</required>
+        </attribute>
+
+        <attribute>
+            <name>pager</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.wx.serveplatform.common.taglib.Pager</type>
+        </attribute>
+
+    </tag>
+</taglib>

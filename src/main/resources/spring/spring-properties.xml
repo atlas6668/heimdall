@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!-- ========================= PROPERTIES DEFINITION ========================= -->
+
+    <!-- 将多个配置文件读取到容器中，交给Spring管理 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<!-- 这里支持多种寻址方式：classpath和file -->
+				<value>classpath:properties/database.properties</value>
+				<!-- 
+				<value>classpath:jedis.properties</value>
+				 -->
+				<!-- 推荐使用file的方式引入，这样可以将配置和代码分离 -->
+				<!-- <value>file:/opt/demo/config/demo.properties</value> -->
+			</list>
+		</property>
+	</bean>
+    
+</beans>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- ========================= TRANSACTIONMANAGER DEFINITION ========================= -->
+
+	<!-- JPA EntityManagerFactory -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          p:dataSource-ref="dataSource">
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+                  p:database="${db.database}" p:showSql="${db.showSql}"/>
+            <!-- the 'database' parameter refers to the database dialect being used.
+                By default, Hibernate will use a 'HSQL' dialect because 'db.database' has been set to 'HSQL'
+                inside file properties/database.properties
+
+             -->
+        </property>
+        <property name="jpaProperties">  
+            <props>  
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>  
+                <prop key="hibernate.cache.use_query_cache">true</prop>  
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>  
+                <prop key="hibernate.generate_statistics">true</prop>  
+                <prop key="hibernate.use_sql_comments">true</prop>  
+                <prop key="hibernate.format_sql">true</prop>  
+            </props>  
+        </property>
+        <!-- gDickens: BOTH Persistence Unit and Packages to Scan are NOT compatible, persistenceUnit will win -->
+        <!-- <property name="persistenceUnitName" value="ip"/> -->
+        <property name="packagesToScan" value="com.wx.serveplatform.**.model"/>
+    </bean>
+	
+	<!-- Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		
+	</bean>
+          
+    <!-- enables scanning for @Transactional annotations -->
+    <tx:annotation-driven transaction-manager="transactionManager" />     
+          
+	
+    <!-- jdbcTemplate -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="namedParameterJdbcTemplate"
+          class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    
+    <!-- scan service -->
+    <context:component-scan base-package="com.wx.serveplatform.**.service">
+	</context:component-scan>
+	
+	<!--
+        Post-processor to perform exception translation on @Repository classes (from native
+        exceptions such as JPA PersistenceExceptions to Spring's DataAccessException hierarchy).
+    -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+	
+	<!-- spring data jpa repositories -->
+    <jpa:repositories base-package="com.wx.serveplatform.**.sdj">
+    </jpa:repositories>
+    
+    <!-- scan repository -->
+    <context:component-scan base-package="com.wx.serveplatform.**.repository">
+	</context:component-scan>
+    
+</beans>
